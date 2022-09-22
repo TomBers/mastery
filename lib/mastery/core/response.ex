@@ -6,7 +6,7 @@ defmodule Mastery.Core.Response do
     template = question.template
 
     %__MODULE__{
-      quiz_title: quiz.title,
+      quiz_title: quiz.titl,
       template_name: template.name,
       to: question.asked,
       email: email,

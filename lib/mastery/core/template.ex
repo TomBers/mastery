@@ -1,5 +1,5 @@
 defmodule Mastery.Core.Template do
-  defstruct ~w[name category instructions raw compiled gnerators checker]a
+  defstruct ~w[name category instructions raw compiled generators checker]a
 
   def new(fields) do
     raw = Keyword.fetch!(fields, :raw)

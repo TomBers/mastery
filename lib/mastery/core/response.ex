@@ -6,12 +6,12 @@ defmodule Mastery.Core.Response do
     template = question.template
 
     %__MODULE__{
-      quiz_title: quiz.titl,
+      quiz_title: quiz.title,
       template_name: template.name,
       to: question.asked,
       email: email,
       answer: answer,
-      correct: template.checker.(question.subsituitions, answer),
+      correct: template.checker.(question.subsitutions, answer),
       timestamp: DateTime.utc_now()
     }
   end

@@ -1,5 +1,5 @@
 defmodule Mastery.Core.Question do
-  defstruct ~w[asked subsitutions template]a
+  defstruct ~w[asked subsitutions template answer]a
 
   alias Mastery.Core.Template
 
@@ -19,7 +19,8 @@ defmodule Mastery.Core.Question do
     %__MODULE__{
       asked: compile(template, subsitutions),
       subsitutions: subsitutions,
-      template: template
+      template: template,
+      answer: template.calc_fn.(subsitutions)
     }
   end
 

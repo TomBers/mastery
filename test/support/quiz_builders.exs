@@ -9,12 +9,12 @@
 defmodule QuizBuilders do
   defmacro __using__(_options) do
     quote do
-      alias Mastery.Core.{Template, Response, Quiz}
+      alias Mastery.Core.{Template, Response, Quiz, Question}
       import QuizBuilders, only: :functions
     end
   end
 
-  alias Mastery.Core.{Template, Question, Quiz}    
+  alias Mastery.Core.{Template, Question, Quiz}
 
   def template_fields(overrides \\ [ ]) do
     Keyword.merge(
@@ -29,7 +29,7 @@ defmodule QuizBuilders do
       overrides
     )
   end
-  
+
   def double_digit_addition_template_fields() do
     template_fields(
       name: :double_digit_addition,
@@ -40,21 +40,21 @@ defmodule QuizBuilders do
   def addition_generators(left, right \\ nil) do
     %{left: left, right: right || left}
   end
-  
+
   def double_digits() do
     Enum.to_list(10..99)
   end
-    
+
   def single_digits() do
     Enum.to_list(0..9)
   end
-  
+
   def addition_checker(substitutions, answer) do
     left = Keyword.fetch!(substitutions, :left)
     right = Keyword.fetch!(substitutions, :right)
     to_string(left + right) == String.trim(answer)
   end
-  
+
   def quiz_fields(overrides) do
     Keyword.merge([title: "Simple Arithmetic"], overrides)
   end
@@ -64,14 +64,14 @@ defmodule QuizBuilders do
     |> quiz_fields
     |> Quiz.new
   end
-  
+
   def build_question(overrides \\ [ ]) do
     overrides
     |> template_fields
     |> Template.new
     |> Question.new
   end
-  
+
   def build_quiz_with_two_templates(quiz_overrides \\ []) do
     build_quiz(quiz_overrides)
     |> Quiz.add_template(template_fields())
